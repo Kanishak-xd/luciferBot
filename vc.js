@@ -20,10 +20,6 @@ client.once("ready", async () => {
   }
 
   const voiceChannel = guild.channels.cache.get(voiceChannelId);
-  if (!voiceChannel || voiceChannel.type !== 2) {
-    console.error("Voice channel not found or invalid type!");
-    return;
-  }
 
   const connection = joinVoiceChannel({
     channelId: voiceChannelId,
