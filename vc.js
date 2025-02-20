@@ -13,12 +13,6 @@ const voiceChannelId = process.env.NOX_VC_CHANNEL_ID;
 client.once("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
-  const guild = client.guilds.cache.get(guildId);
-  if (!guild) {
-    console.error("Guild not found!");
-    return;
-  }
-
   const voiceChannel = guild.channels.cache.get(voiceChannelId);
 
   const connection = joinVoiceChannel({
