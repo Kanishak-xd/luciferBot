@@ -12,7 +12,7 @@ const client = new Client({
 const token = process.env.BOT_TOKEN;
 
 client.once("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`luci module loaded.`);
 
   // Set bot status here so it's applied to all modules
   client.user.setPresence({
