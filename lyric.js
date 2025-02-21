@@ -1,53 +1,47 @@
 require("dotenv").config();
-const { Client, GatewayIntentBits } = require("discord.js");
 const Genius = require("genius-lyrics");
 
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ],
-});
+module.exports = (client) => {
+  const genius = new Genius.Client(process.env.GENIUS_API_KEY);
 
-const token = process.env.BOT_TOKEN;
-const geniusApiKey = process.env.GENIUS_API_KEY;
+  client.once("ready", () => {
+    console.log(`lyric module loaded!`);
 
-const genius = new Genius.Client(geniusApiKey);
-
-client.once("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-
-  client.user.setPresence({
-    status: "idle", // online, idle, dnd, invisible
-    activities: [
-      {
-        name: "over Server",
-        type: 3, // 0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching, 5 = Competing
-      },
-    ],
+    // Set bot status
+    client.user.setPresence({
+      status: "idle", // online, idle, dnd, invisible
+      activities: [
+        {
+          name: "over Server",
+          type: 3, // Watching
+        },
+      ],
+    });
   });
-});
 
-client.on("messageCreate", async (message) => {
-  if (!message.content.startsWith(".l ")) return;
+  client.on("messageCreate", async (message) => {
+    if (!message.content.startsWith(".l ")) return;
 
-  // Extract song name & artist
-  const query = message.content.slice(3).trim();
+    const query = message.content.slice(3).trim();
 
-  try {
-    const song = await genius.songs.search(query);
-    const lyrics = await song[0].lyrics();
+    try {
+      const searches = await genius.songs.search(query);
+      if (!searches.length) {
+        message.reply("No lyrics found for this song.");
+        return;
+      }
 
-    // Split lyrics into multiple messages if too long
-    const chunks = lyrics.match(/[\s\S]{1,1900}/g);
-    for (const chunk of chunks) {
-      await message.channel.send(chunk);
+      const song = searches[0];
+      const lyrics = await song.lyrics();
+
+      // Split long lyrics
+      const chunks = lyrics.match(/[\s\S]{1,1900}/g);
+      for (const chunk of chunks) {
+        await message.channel.send(chunk);
+      }
+    } catch (error) {
+      console.error("Error fetching lyrics:", error);
+      message.reply("Couldn't fetch lyrics.");
     }
-  } catch (error) {
-    console.error("Error fetching lyrics:", error);
-    message.reply("Couldn't fetch lyrics.");
-  }
-});
-
-client.login(token);
+  });
+};
