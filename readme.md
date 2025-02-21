@@ -2,6 +2,10 @@
 
 A discord bot made for learning and fun
 
+![alt text](https://i.imgur.com/ZFIJ8uW.png)
+![alt text](https://i.imgur.com/7bvLmFD.png)
+![alt text](https://i.imgur.com/u8qrSGP.png)
+
 ## Current Capabilities
 
 - Chat in any channel through CLI
