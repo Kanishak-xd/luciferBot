@@ -1,4 +1,4 @@
-# Jun Bot DiscordJS
+# Lucifer Bot DiscordJS
 
 A discord bot made for learning and fun
 
