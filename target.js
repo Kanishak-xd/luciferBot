@@ -11,17 +11,20 @@ const client = new Client({
   ],
 });
 
+require("./lyric")(client);
+
 const token = process.env.BOT_TOKEN;
 
 client.once("ready", () => {
-  console.log(`target module loaded.`);
-  let channelId = process.env.CHANNEL_NOX_ID;
+  console.log(`target module loaded..`);
+  let channelId = null;
 
   client.user.setPresence({
     status: "idle",
     activities: [{ name: "over Server", type: 3 }],
   });
 
+  // Define Target Channel
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -29,51 +32,26 @@ client.once("ready", () => {
   });
   rl.prompt();
 
-  // First input
-  rl.on("line", (input1) => {
-    channelId = input1;
-    rl.setPrompt(`Target Channel "${input1}" locked in.\nEnter your message: `);
+  // Set Target Channel
+  rl.once("line", (input1) => {
+    if (input1 === "1") {
+      channelId = process.env.CHANNEL_SYN_ID;
+    } else if (input1 === "2") {
+      channelId = process.env.CHANNEL_BHTN_ID;
+    } else if (input1 === "3") {
+      channelId = process.env.CHANNEL_NOX_ID;
+    }
+    const channel = client.channels.cache.get(channelId);
+    rl.setPrompt(`Send to ${channel.name} chat: `);
     rl.prompt();
 
-    // Second input
-    rl.once("line", (input2) => {
-      const channel = client.channels.cache.get(channelId);
-      let message = input2;
-      if (channel) {
-        channel.send(message);
-      }
+    // Message Input
+    rl.on("line", async (input2) => {
+      rl.setPrompt(`Send to ${channel.name} chat: `);
+      await channel.send(input2);
       rl.prompt();
-      //   rl.close();
     });
   });
-
-  //   // Set Target Channel
-  //   rl = readline.createInterface({
-  //     input: process.stdin,
-  //     output: process.stdout,
-  //     prompt: `Set Target Channel [ 1 = Syndicate, 2 = Bhutan, 3 = Nox ]: `,
-  //   });
-  //   rl.prompt();
-  //   rl.on("line", (inp1) => {
-  //     if (inp1 === "1") {
-  //       channelId = process.env.CHANNEL_SYN_ID;
-  //     } else if (inp1 === "2") {
-  //       channelId = process.env.CHANNEL_BHTN_ID;
-  //     } else if (inp1 === "3") {
-  //       channelId = process.env.CHANNEL_NOX_ID;
-  //     }
-  //     console.log(`Target Channel set to: ${channelId}`);
-  //     rl.on("line", (inp2) => {
-  //       let message = inp2;
-  //       let channel = channelId;
-  //       if (channel) {
-  //         channel.send(message);
-  //       }
-  //     });
-  //   });
 });
-
-// require("./lyric")(client);
-// require("./chat")(client);
 
 client.login(token);
