@@ -11,10 +11,10 @@ A discord bot made for learning and fun
 
 ## Commands
 
-To chat with someone through CLI
+To start the bot or chat with someone through CLI
 
 ```
-node chat.js
+node luci.js
 ```
 
 To connect to a voice channel
