@@ -1,4 +1,5 @@
 require("dotenv").config();
+const readline = require("readline");
 const { Client, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
@@ -21,8 +22,8 @@ client.once("ready", () => {
   });
 });
 
-// Import chat and lyric modules
-require("./lyric")(client);
+// Import chat and lyri modules
+require("./lyri")(client);
 require("./chat")(client);
 
 client.login(token);

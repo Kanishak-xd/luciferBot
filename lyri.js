@@ -5,17 +5,12 @@ module.exports = (client) => {
   const genius = new Genius.Client(process.env.GENIUS_API_KEY);
 
   client.once("ready", () => {
-    console.log(`lyric module loaded.`);
+    console.log(`lyri module loaded..`);
 
     // Set bot status
     client.user.setPresence({
-      status: "idle", // online, idle, dnd, invisible
-      activities: [
-        {
-          name: "over Server",
-          type: 3, // Watching
-        },
-      ],
+      status: "idle",
+      activities: [{ name: "over Server", type: 3 }],
     });
   });
 
