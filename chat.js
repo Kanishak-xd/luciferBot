@@ -2,7 +2,7 @@ require("dotenv").config();
 const readline = require("readline");
 
 module.exports = (client) => {
-  const channelId = process.env.CHANNEL_SYN_ID;
+  const channelId = process.env.CHANNEL_NOX_ID;
 
   const userMentions = {
     Sie: `<@${process.env.SIE_ID}>`,
