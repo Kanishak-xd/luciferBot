@@ -24,14 +24,6 @@ module.exports = (client) => {
     });
 
     // Set Target Channel
-    // const now = new Date();
-    // const day = now.toLocaleString("en-US", { weekday: "long" });
-    // const time = now.toLocaleTimeString("en-US", {
-    //   hour: "2-digit",
-    //   minute: "2-digit",
-    //   hour12: true,
-    // });
-
     // let channelId = process.env.CHANNEL_NOX_ID;
     // const channel = client.channels.cache.get(channelId);
 
