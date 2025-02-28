@@ -66,26 +66,6 @@ module.exports = (client) => {
         `);
       });
     }
-
-    // Pings
-    const userMentions = {
-      Sie: `<@${process.env.SIE_ID}>`,
-      Kar: `<@${process.env.KAR_ID}>`,
-      Kel: `<@${process.env.KEL_ID}>`,
-      Dev: `<@${process.env.DEV_ID}>`,
-      Dol: `<@${process.env.DOL_ID}>`,
-      Lac: `<@${process.env.LAC_ID}>`,
-      Ven: `<@${process.env.VEN_ID}>`,
-    };
-
-    // EMOJIS
-    const emojiMappings = {
-      ":lul:": `<:omegalul:${process.env.OMEGALUL_EMO_SYN}>`,
-      ":kek:": `<:kekw:${process.env.KEKW_EMO_SYN}>`,
-      ":champ:": `<:WeirdChamp:${process.env.WEIRD_CHAMP_EMO_SYN}>`,
-      ":thonk:": `<:thonk:${process.env.THONK_EMO_SYN}>`,
-      ":swag:": `<:swag:${process.env.SWAG_EMO_SYN}>`,
-    };
   });
 };
 
