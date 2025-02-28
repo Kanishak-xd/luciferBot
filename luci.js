@@ -23,6 +23,7 @@ client.once("ready", () => {
 });
 
 // Import chat and lyri modules
+require("./nom")(client);
 require("./lyri")(client);
 require("./chat")(client);
 

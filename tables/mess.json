@@ -1,0 +1,44 @@
+{
+    "monday": {
+        "breakfast": "1",
+        "lunch": "2",
+		"snacks": "3",
+		"dinner": "4"
+    },
+    "tuesday": {
+        "breakfast": "1",
+        "lunch": "2",
+		"snacks": "3",
+		"dinner": "4"
+    },
+    "wednesday": {
+        "breakfast": "1",
+        "lunch": "2",
+		"snacks": "3",
+		"dinner": "4"
+    },
+    "thursday": {
+        "breakfast": "1",
+        "lunch": "2",
+		"snacks": "3",
+		"dinner": "4"
+    },
+    "friday": {
+        "breakfast": "sandwiches",
+        "lunch": "sushi",
+		"snacks": "cinnamon rolls",
+		"dinner": "ramen"
+    },
+    "saturday": {
+        "breakfast": "1",
+        "lunch": "2",
+		"snacks": "3",
+		"dinner": "4"
+    },
+    "sunday": {
+        "breakfast": "1",
+        "lunch": "2",
+		"snacks": "3",
+		"dinner": "4"
+    }
+}
