@@ -16,7 +16,7 @@ const token = process.env.BOT_TOKEN;
 
 module.exports = (client) => {
   client.once("ready", () => {
-    console.log(`nom module loaded..`);
+    console.log(`nom module loaded.`);
 
     client.user.setPresence({
       status: "idle",
@@ -40,33 +40,32 @@ module.exports = (client) => {
     //   channel.send(message);
     // }
 
-    setInterval(() => {
-      const now = new Date();
-      const day = now.toLocaleString("en-US", { weekday: "long" });
-      let time = now
-        .toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        })
-        .trim();
+    const now = new Date();
+    const day = now.toLocaleString("en-US", { weekday: "long" });
 
-      if (day === "Friday" && time === "09:56 PM") {
-        const filePath = "tables/mess.json";
-        fs.readFile(filePath, "utf8", (err, data) => {
-          const jsonData = JSON.parse(data);
-          console.log(
-            `Today's breakfast is ${jsonData["friday"]["breakfast"]}`
-          );
-        });
-      } else if (day === "Friday" && time === "09:57 PM") {
-        const filePath = "tables/mess.json";
-        fs.readFile(filePath, "utf8", (err, data) => {
-          const jsonData = JSON.parse(data);
-          console.log(`Today's lunch is ${jsonData["friday"]["lunch"]}`);
-        });
-      }
-    }, 60000);
+    if (day === "Friday") {
+      const filePath = "tables/mess.json";
+      fs.readFile(filePath, "utf8", (err, data) => {
+        const jsonData = JSON.parse(data);
+        console.log(`
+            Breakfast: ${jsonData["friday"]["breakfast"]}\n
+            Lunch: ${jsonData["friday"]["lunch"]}\n
+            Snacks: ${jsonData["friday"]["snacks"]}\n
+            Dinner: ${jsonData["friday"]["dinner"]}
+          `);
+      });
+    } else if (day === "Saturday") {
+      const filePath = "tables/mess.json";
+      fs.readFile(filePath, "utf8", (err, data) => {
+        const jsonData = JSON.parse(data);
+        console.log(`
+          Breakfast: ${jsonData["saturday"]["breakfast"]}\n
+          Lunch: ${jsonData["saturday"]["lunch"]}\n
+          Snacks: ${jsonData["saturday"]["snacks"]}\n
+          Dinner: ${jsonData["saturday"]["dinner"]}
+        `);
+      });
+    }
 
     // Pings
     const userMentions = {
