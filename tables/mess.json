@@ -1,44 +1,44 @@
 {
     "monday": {
-        "breakfast": "1",
-        "lunch": "2",
-		"snacks": "3",
-		"dinner": "4"
+        "breakfast": "Idlli, Sambhar, Coconut chutney",
+        "lunch": "Kadhi Pakora, Aloo",
+		"snacks": "Sandwich",
+		"dinner": "Daal Makhani, Suji Halwa"
     },
     "tuesday": {
-        "breakfast": "1",
-        "lunch": "2",
-		"snacks": "3",
-		"dinner": "4"
+        "breakfast": "Gobhi Parantha, Mint Sauce",
+        "lunch": "Rajma, Kaddu, Curd",
+		"snacks": "Kulcha / Chana Chat",
+		"dinner": "Moong Daal, Veg Kofta, Besan Laddu"
     },
     "wednesday": {
-        "breakfast": "1",
-        "lunch": "2",
-		"snacks": "3",
-		"dinner": "4"
+        "breakfast": "Poha, Cornflakes",
+        "lunch": "Chana Daal, Paneer / Egg",
+		"snacks": "Aloo Toast",
+		"dinner": "Chole, Aloo Capsicum, Boondi"
     },
     "thursday": {
-        "breakfast": "1",
-        "lunch": "2",
-		"snacks": "3",
-		"dinner": "4"
+        "breakfast": "Aloo Parantha, Mint Sauce",
+        "lunch": "Aloo Bhaji, Poori, Veg Biryani",
+		"snacks": "Macaroni",
+		"dinner": "Black Masoor Daal, Soyabean Masala, Gulab Jamun"
     },
     "friday": {
-        "breakfast": "sandwiches",
-        "lunch": "sushi",
-		"snacks": "cinnamon rolls",
-		"dinner": "ramen"
+        "breakfast": "Methi Parantha, Tamatar Chaniya Chutney",
+        "lunch": "Red Malka Daal, Sev Tamatar",
+		"snacks": "Samosa",
+		"dinner": "Arhar Daal, Hing Dhaniya Aloo, Rice Kheer / Seviyan Kheer"
     },
     "saturday": {
-        "breakfast": "1",
-        "lunch": "2",
-		"snacks": "3",
-		"dinner": "4"
+        "breakfast": "Vada / Adai, Coconut Chutney",
+        "lunch": "Black Chana, Aloo Gobhi, Roohafza",
+		"snacks": "Patties",
+		"dinner": "Noodles, Manchurian"
     },
     "sunday": {
-        "breakfast": "1",
-        "lunch": "2",
-		"snacks": "3",
-		"dinner": "4"
+        "breakfast": "Egg Bhurji",
+        "lunch": "Chole Bhature",
+		"snacks": "Bhel Poori",
+		"dinner": "Rajma Raseela, Dahi Aloo Sabzi, Jalebi"
     }
 }
