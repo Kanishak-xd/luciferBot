@@ -35,10 +35,18 @@ module.exports = (client) => {
     const now = new Date();
     const day = now.toLocaleString("en-US", { weekday: "long" }).toLowerCase();
 
+    const time = now
+      .toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+      .trim();
+
     const filePath = "tables/mess.json";
     fs.readFile(filePath, "utf8", (err, data) => {
       const jsonData = JSON.parse(data);
-      console.log(jsonData[day]);
+      console.log(jsonData[day][time]);
     });
   });
 };

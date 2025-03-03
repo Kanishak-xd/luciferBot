@@ -1,44 +1,100 @@
 {
     "monday": {
-        "breakfast": "Idlli, Sambhar, Coconut chutney",
-        "lunch": "Kadhi Pakora, Aloo",
-		"snacks": "Sandwich",
-		"dinner": "Daal Makhani, Suji Halwa"
+        "07:30 AM": {
+            "breakfast": "Idlli, Sambhar, Coconut chutney"
+        },
+        "11:30 AM": {
+            "lunch": "Kadhi Pakora, Aloo"
+        },
+        "04:30 PM": {
+            "snacks": "Sandwich"
+        },
+        "07:00 PM": {
+            "dinner": "Daal Makhani, Suji Halwa"
+        }
     },
     "tuesday": {
-        "breakfast": "Gobhi Parantha, Mint Sauce",
-        "lunch": "Rajma, Kaddu, Curd",
-		"snacks": "Kulcha / Chana Chat",
-		"dinner": "Moong Daal, Veg Kofta, Besan Laddu"
+        "07:30 AM": {
+            "breakfast": "Gobhi Parantha, Mint Sauce"
+        },
+        "11:30 AM": {
+            "lunch": "Rajma, Kaddu, Curd"
+        },
+        "04:30 PM": {
+            "snacks": "Kulcha / Chana Chat"
+        },
+        "07:00 PM": {
+            "dinner": "Moong Daal, Veg Kofta, Besan Laddu"
+        }
     },
     "wednesday": {
-        "breakfast": "Poha, Cornflakes",
-        "lunch": "Chana Daal, Paneer / Egg",
-		"snacks": "Aloo Toast",
-		"dinner": "Chole, Aloo Capsicum, Boondi"
+        "07:30 AM": {
+            "breakfast": "Poha, Cornflakes"
+        },
+        "11:30 AM": {
+            "lunch": "Chana Daal, Paneer / Egg"
+        },
+        "04:30 PM": {
+            "snacks": "Aloo Toast"
+        },
+        "07:00 PM": {
+            "dinner": "Chole, Aloo Capsicum, Boondi"
+        }
     },
     "thursday": {
-        "breakfast": "Aloo Parantha, Mint Sauce",
-        "lunch": "Aloo Bhaji, Poori, Veg Biryani",
-		"snacks": "Macaroni",
-		"dinner": "Black Masoor Daal, Soyabean Masala, Gulab Jamun"
+        "07:30 AM": {
+            "breakfast": "Aloo Parantha, Mint Sauce"
+        },
+        "11:30 AM": {
+            "lunch": "Aloo Bhaji, Poori, Veg Biryani"
+        },
+        "04:30 PM": {
+            "snacks": "Macaroni"
+        },
+        "07:00 PM": {
+            "dinner": "Black Masoor Daal, Soyabean Masala, Gulab Jamun"
+        }
     },
     "friday": {
-        "breakfast": "Methi Parantha, Tamatar Chaniya Chutney",
-        "lunch": "Red Malka Daal, Sev Tamatar",
-		"snacks": "Samosa",
-		"dinner": "Arhar Daal, Hing Dhaniya Aloo, Rice Kheer / Seviyan Kheer"
+        "07:30 AM": {
+            "breakfast": "Methi Parantha, Tamatar Chaniya Chutney"
+        },
+        "11:30 AM": {
+            "lunch": "Red Malka Daal, Sev Tamatar"
+        },
+        "04:30 PM": {
+            "snacks": "Samosa"
+        },
+        "07:00 PM": {
+            "dinner": "Arhar Daal, Hing Dhaniya Aloo, Rice Kheer / Seviyan Kheer"
+        }
     },
     "saturday": {
-        "breakfast": "Vada / Adai, Coconut Chutney",
-        "lunch": "Black Chana, Aloo Gobhi, Roohafza",
-		"snacks": "Patties",
-		"dinner": "Noodles, Manchurian"
+        "07:30 AM": {
+            "breakfast": "Vada / Adai, Coconut Chutney"
+        },
+        "11:30 AM": {
+            "lunch": "Black Chana, Aloo Gobhi, Roohafza"
+        },
+        "04:30 PM": {
+            "snacks": "Patties"
+        },
+        "07:00 PM": {
+            "dinner": "Noodles, Manchurian"
+        }
     },
     "sunday": {
-        "breakfast": "Egg Bhurji",
-        "lunch": "Chole Bhature",
-		"snacks": "Bhel Poori",
-		"dinner": "Rajma Raseela, Dahi Aloo Sabzi, Jalebi"
+        "08:30 AM": {
+            "breakfast": "Egg Bhurji"
+        },
+        "11:30 AM": {
+            "lunch": "Chole Bhature"
+        },
+        "04:30 PM": {
+            "snacks": "Bhel Poori"
+        },
+        "07:00 PM": {
+            "dinner": "Rajma Raseela, Dahi Aloo Sabzi, Jalebi"
+        }
     }
 }
