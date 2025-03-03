@@ -26,5 +26,41 @@ node vc.js
 To fetch lyrics of a song from Genius API
 
 ```
-.l Song name Artist name
+lyr Song name Artist name
+```
+
+To get full mess menu
+
+```
+.m
+```
+
+To get today's mess menu
+
+```
+.t
+```
+
+To see today's breakfast
+
+```
+.b
+```
+
+To see today's lunch
+
+```
+.l
+```
+
+To see today's snacks
+
+```
+.s
+```
+
+To see today's dinner
+
+```
+.d
 ```
