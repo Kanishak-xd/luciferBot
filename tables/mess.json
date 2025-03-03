@@ -7,7 +7,7 @@
             "lunch": "Kadhi Pakora, Aloo"
         },
         "04:30 PM": {
-            "snacks": "Sandwich"
+            "snacks": "Coleslaw Sandwiches"
         },
         "07:00 PM": {
             "dinner": "Daal Makhani, Suji Halwa"
@@ -84,7 +84,7 @@
         }
     },
     "sunday": {
-        "08:30 AM": {
+        "07:30 AM": {
             "breakfast": "Egg Bhurji"
         },
         "11:30 AM": {
