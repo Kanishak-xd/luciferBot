@@ -8,6 +8,7 @@ A discord bot made for learning and fun
 - Use of emojis
 - Connect to any voice channel
 - fetch lyrics from genius API
+- display mess menu
 
 ## Commands
 
