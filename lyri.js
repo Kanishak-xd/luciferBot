@@ -15,7 +15,7 @@ module.exports = (client) => {
   });
 
   client.on("messageCreate", async (message) => {
-    if (!message.content.startsWith(".l ")) return;
+    if (!message.content.startsWith("lyr")) return;
 
     const query = message.content.slice(3).trim();
 
