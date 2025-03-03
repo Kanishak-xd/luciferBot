@@ -23,15 +23,6 @@ module.exports = (client) => {
       activities: [{ name: "over Server", type: 3 }],
     });
 
-    // Set Target Channel
-    // let channelId = process.env.CHANNEL_NOX_ID;
-    // const channel = client.channels.cache.get(channelId);
-
-    // if (day === "Friday" && time === "8:30 PM") {
-    //   let message = `------------gotcha-----------`;
-    //   channel.send(message);
-    // }
-
     client.on("messageCreate", (message) => {
       if (message.author.bot) return; // Ignore bot messages
 
