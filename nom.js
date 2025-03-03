@@ -33,86 +33,13 @@ module.exports = (client) => {
     // }
 
     const now = new Date();
-    const day = now.toLocaleString("en-US", { weekday: "long" });
+    const day = now.toLocaleString("en-US", { weekday: "long" }).toLowerCase();
 
-    if (day === "Monday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-            Breakfast: ${jsonData["monday"]["breakfast"]}\n
-            Lunch: ${jsonData["monday"]["lunch"]}\n
-            Snacks: ${jsonData["monday"]["snacks"]}\n
-            Dinner: ${jsonData["monday"]["dinner"]}
-          `);
-      });
-    } else if (day === "Tuesday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-          Breakfast: ${jsonData["tuesday"]["breakfast"]}\n
-          Lunch: ${jsonData["tuesday"]["lunch"]}\n
-          Snacks: ${jsonData["tuesday"]["snacks"]}\n
-          Dinner: ${jsonData["tuesday"]["dinner"]}
-        `);
-      });
-    } else if (day === "Wednesday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-          Breakfast: ${jsonData["wednesday"]["breakfast"]}\n
-          Lunch: ${jsonData["wednesday"]["lunch"]}\n
-          Snacks: ${jsonData["wednesday"]["snacks"]}\n
-          Dinner: ${jsonData["wednesday"]["dinner"]}
-        `);
-      });
-    } else if (day === "Thursday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-          Breakfast: ${jsonData["thursday"]["breakfast"]}\n
-          Lunch: ${jsonData["thursday"]["lunch"]}\n
-          Snacks: ${jsonData["thursday"]["snacks"]}\n
-          Dinner: ${jsonData["thursday"]["dinner"]}
-        `);
-      });
-    } else if (day === "Friday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-          Breakfast: ${jsonData["friday"]["breakfast"]}\n
-          Lunch: ${jsonData["friday"]["lunch"]}\n
-          Snacks: ${jsonData["friday"]["snacks"]}\n
-          Dinner: ${jsonData["friday"]["dinner"]}
-        `);
-      });
-    } else if (day === "Saturday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-          Breakfast: ${jsonData["saturday"]["breakfast"]}\n
-          Lunch: ${jsonData["saturday"]["lunch"]}\n
-          Snacks: ${jsonData["saturday"]["snacks"]}\n
-          Dinner: ${jsonData["saturday"]["dinner"]}
-        `);
-      });
-    } else if (day === "Sunday") {
-      const filePath = "tables/mess.json";
-      fs.readFile(filePath, "utf8", (err, data) => {
-        const jsonData = JSON.parse(data);
-        console.log(`
-          Breakfast: ${jsonData["sunday"]["breakfast"]}\n
-          Lunch: ${jsonData["sunday"]["lunch"]}\n
-          Snacks: ${jsonData["sunday"]["snacks"]}\n
-          Dinner: ${jsonData["sunday"]["dinner"]}
-        `);
-      });
-    }
+    const filePath = "tables/mess.json";
+    fs.readFile(filePath, "utf8", (err, data) => {
+      const jsonData = JSON.parse(data);
+      console.log(jsonData[day]);
+    });
   });
 };
 
