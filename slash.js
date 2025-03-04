@@ -30,13 +30,9 @@ module.exports = (client) => {
 
     const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
-    await rest.put(
-      Routes.applicationGuildCommands(
-        process.env.CLIENT_ID,
-        process.env.CAP_SERVER_ID
-      ),
-      { body: commands }
-    );
+    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+      body: commands,
+    });
   });
 
   // Listen for slash command interactions
