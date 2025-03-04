@@ -12,7 +12,7 @@ A discord bot made for learning and fun
 
 ## Commands List
 
-To start the bot or chat through CLI
+To start the bot or chat (local environment only) through CLI
 
 ```
 node luci.js
@@ -24,13 +24,13 @@ To get the help menu
 /help
 ```
 
-To connect to a voice channel
+To connect to a voice channel (local environmet only)
 
 ```
 node vc.js
 ```
 
-To fetch lyrics of a song from Genius API
+To fetch lyrics of a song from Genius API (local environmet only)
 
 ```
 lyr Song name Artist name
