@@ -26,6 +26,7 @@ client.once("ready", () => {
 
 // Import chat and lyri modules
 require("./lyri")(client);
+require("./slash")(client);
 require("./chat")(client);
 
 client.login(token);
