@@ -32,8 +32,8 @@ client.once("ready", () => {
   });
 });
 
-// Import chat and lyri modules
-require("./lyri")(client);
+// Import the modules
+// require("./lyri")(client);
 require("./slash")(client);
 // require("./chat")(client);
 
