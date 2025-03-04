@@ -24,13 +24,13 @@ To get the help menu
 /help
 ```
 
-To connect to a voice channel (local environmet only)
+To connect to a voice channel (local environment only)
 
 ```
 node vc.js
 ```
 
-To fetch lyrics of a song from Genius API (local environmet only)
+To fetch lyrics of a song from Genius API (local environment only)
 
 ```
 lyr Song name Artist name
