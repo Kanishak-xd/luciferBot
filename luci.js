@@ -1,5 +1,4 @@
 require("dotenv").config();
-const readline = require("readline");
 const { Client, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
@@ -20,7 +19,7 @@ client.once("ready", () => {
   // Set bot status here so it's applied to all modules
   client.user.setPresence({
     status: "idle",
-    activities: [{ name: "over Server", type: 3 }],
+    activities: [{ name: "your requests", type: 2 }],
   });
 });
 

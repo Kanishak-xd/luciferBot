@@ -8,10 +8,10 @@ module.exports = (client) => {
     console.log(`lyri module loaded...`);
 
     // Set bot status
-    client.user.setPresence({
-      status: "idle",
-      activities: [{ name: "over Server", type: 3 }],
-    });
+    // client.user.setPresence({
+    //   status: "idle",
+    //   activities: [{ name: "over Server", type: 3 }],
+    // });
   });
 
   client.on("messageCreate", async (message) => {

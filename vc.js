@@ -13,15 +13,15 @@ const voiceChannelId = process.env.NOX_VC_CHANNEL_ID;
 client.once("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
-  client.user.setPresence({
-    status: "idle", // online, idle, dnd, invisible
-    activities: [
-      {
-        name: "over Server",
-        type: 3, // 0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching, 5 = Competing
-      },
-    ],
-  });
+  // client.user.setPresence({
+  //   status: "idle", // online, idle, dnd, invisible
+  //   activities: [
+  //     {
+  //       name: "over Server",
+  //       type: 3, // 0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching, 5 = Competing
+  //     },
+  //   ],
+  // });
 
   const voiceChannel = guild.channels.cache.get(voiceChannelId);
 

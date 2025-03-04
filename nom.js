@@ -18,10 +18,10 @@ module.exports = (client) => {
   client.once("ready", () => {
     console.log(`nom module loaded.`);
 
-    client.user.setPresence({
-      status: "idle",
-      activities: [{ name: "over Server", type: 3 }],
-    });
+    // client.user.setPresence({
+    //   status: "idle",
+    //   activities: [{ name: "over Server", type: 3 }],
+    // });
 
     client.on("messageCreate", (message) => {
       if (message.author.bot) return; // Ignore bot messages

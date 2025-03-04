@@ -18,10 +18,10 @@ module.exports = (client) => {
     console.log(`chat module loaded....`);
     let channelId = null;
 
-    client.user.setPresence({
-      status: "idle",
-      activities: [{ name: "over Server", type: 3 }],
-    });
+    // client.user.setPresence({
+    //   status: "idle",
+    //   activities: [{ name: "over Server", type: 3 }],
+    // });
 
     // Define Target Channel
     const rl = readline.createInterface({
