@@ -12,7 +12,7 @@ module.exports = (client) => {
 
     try {
       if (interaction.commandName === "ping") {
-        await interaction.reply("🏓 pong");
+        await interaction.reply("pong");
       }
 
       if (interaction.commandName === "help") {
@@ -26,15 +26,15 @@ module.exports = (client) => {
         await interaction.reply({ embeds: [helpEmbed] });
       }
     } catch (error) {
-      console.error("❌ Error handling interaction:", error);
+      console.error("Error handling interaction:", error);
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({
-          content: "⚠️ An error occurred while processing the command.",
+          content: "An error occurred while processing the command.",
           ephemeral: true,
         });
       } else {
         await interaction.reply({
-          content: "⚠️ An error occurred while processing the command.",
+          content: "An error occurred while processing the command.",
           ephemeral: true,
         });
       }
