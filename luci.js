@@ -11,7 +11,7 @@ const client = new Client({
 
 const token = process.env.BOT_TOKEN;
 
-require("./nom")(client);
+// require("./nom")(client);
 
 client.once("ready", () => {
   console.log(`luci module loaded..`);
@@ -24,8 +24,9 @@ client.once("ready", () => {
 });
 
 // Import the modules
-require("./lyri")(client);
-require("./slash")(client);
-require("./chat")(client);
+require("./mess-menu/menu-cmds.js")(client);
+// require("./lyri")(client);
+// require("./slash")(client);
+// require("./chat")(client);
 
 client.login(token);
