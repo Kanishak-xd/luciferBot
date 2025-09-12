@@ -16,6 +16,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "genius-lyrics": "^4.4.7",
+    "node-cron": "^4.2.1",
     "xlsx": "^0.18.5"
   }
 }
