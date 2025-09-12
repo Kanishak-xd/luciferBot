@@ -25,6 +25,7 @@ client.once("ready", () => {
 
 // Import the modules
 require("./mess-menu/menu-cmds.js")(client);
+require("./mess-menu/auto.js")(client);
 // require("./lyri")(client);
 // require("./slash")(client);
 // require("./chat")(client);
