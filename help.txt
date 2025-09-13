@@ -15,17 +15,15 @@ To connect to a voice channel
 To fetch lyrics of a song
 ```lyr Song name Artist name```
 
-To get full mess menu
-```.m```
 To get today's mess menu
-```.t```
+```.today```
 To see today's breakfast
-```.b```
+```.breakfast```
 To see today's lunch
-```.l```
+```.lunch```
 To see today's snacks
-```.s```
+```.snacks```
 To see today's dinner
-```.d```
+```.dinner```
 
 -# [Github Repository](https://github.com/Kanishak-xd/luciferBot/)

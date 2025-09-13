@@ -5,7 +5,7 @@ module.exports = (client) => {
   const genius = new Genius.Client(process.env.GENIUS_API_KEY);
 
   client.once("ready", () => {
-    console.log(`lyri module loaded...`);
+    console.log(`lyri module loaded..`);
 
     // Set bot status
     // client.user.setPresence({
