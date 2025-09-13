@@ -9,7 +9,7 @@ function parseMenu() {
 
     if (!fs.existsSync(filePath)) {
       console.error(
-        "❌ Error: mess.xlsx file not found in the current directory."
+        "Error: mess.xlsx file not found in the current directory."
       );
       return;
     }
@@ -22,7 +22,7 @@ function parseMenu() {
       workbook.SheetNames[0];
 
     if (!sheetName) {
-      console.error("❌ Error: No sheets found in the Excel file.");
+      console.error("Error: No sheets found in the Excel file.");
       return;
     }
 
@@ -45,7 +45,7 @@ function parseMenu() {
 
     if (headerRowIndex === -1) {
       console.error(
-        "❌ Error: Could not find the header row with 'MONDAY' in the sheet."
+        "Error: Could not find the header row with 'MONDAY' in the sheet."
       );
       return;
     }
@@ -273,7 +273,7 @@ function parseMenu() {
       )
     );
   } catch (error) {
-    console.error("❌ Error processing the Excel file:", error.message);
+    console.error("Error processing the Excel file:", error.message);
   }
 }
 

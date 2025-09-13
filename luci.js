@@ -12,16 +12,20 @@ const client = new Client({
 const token = process.env.BOT_TOKEN;
 
 client.once("ready", () => {
-  console.log(`luci module loaded..`);
+  console.log(`Lucifer Bot is online!`);
+  console.log(`Serving ${client.guilds.cache.size} servers`);
 
-  // Set bot status here so it's applied to all modules
+  // Set bot status
   client.user.setPresence({
     status: "idle",
     activities: [{ name: "your requests", type: 2 }],
   });
+
+  console.log(`Bot status set to: Listening to your requests`);
+  console.log(`─────────────────────────────────────────────────`);
 });
 
-// Import the modules
+// Import modules
 require("./mess-menu/menu-cmds.js")(client);
 require("./mess-menu/auto.js")(client);
 require("./lyri")(client);

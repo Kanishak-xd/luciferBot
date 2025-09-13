@@ -15,7 +15,8 @@ const token = process.env.BOT_TOKEN;
 
 module.exports = (client) => {
   client.once("ready", () => {
-    console.log(`chat module loaded....`);
+    console.log(`- chat module loaded....`);
+    console.log(`─────────────────────────────────────────────────`);
     let channelId = null;
 
     // client.user.setPresence({

@@ -5,15 +5,12 @@ const cron = require("node-cron");
 module.exports = (client) => {
   // Configuration: Map channel IDs to user IDs who should be pinged
   const CHANNEL_CONFIG = {
-    // Syndicate II Server
     "1115924464518037524": [
-      "985981200059478136", // Siege LSF
-      "465209208489508866", // Siege WUWA
-      "499558025892331522", // Dolith
-      "755416213252866199", // Sarabnoor
-      "1029428423824789514", // Devansh
-      "782231537269080064", // Nikunj
+      "123456789012345678", // Replace with actual user IDs
+      "987654321098765432", // Add more user IDs for this channel
+      // "another_user_id",
     ],
+    // Add more channels and their respective user IDs
     // "another_channel_id": [
     //   "user_id_1",
     //   "user_id_2",
@@ -24,7 +21,7 @@ module.exports = (client) => {
   const MEAL_NOTIFICATIONS = [
     {
       meal: "breakfast",
-      cronTime: "15 7 * * *", // 7:15 AM (45 min before 8:00 AM)
+      cronTime: "15 1 * * *", // 7:15 AM (45 min before 8:00 AM)
       mealTime: "8:00 AM - 9:00 AM",
     },
     {
@@ -45,12 +42,12 @@ module.exports = (client) => {
   ];
 
   client.once("ready", () => {
-    console.log(`auto.js module loaded...`);
+    console.log(`- auto module loaded...`);
 
     // Check if menu.json exists
     const menuPath = path.join(__dirname, "menu.json");
     if (!fs.existsSync(menuPath)) {
-      console.error("menu.json not found! Auto notifications disabled.");
+      console.error("menu.json not found!");
       return;
     }
 
@@ -62,14 +59,12 @@ module.exports = (client) => {
           sendMealNotification(meal, mealTime);
         },
         {
-          timezone: "Asia/Kolkata", // Change this to your timezone
+          timezone: "Asia/Kolkata",
         }
       );
-
-      console.log(
-        `Scheduled ${meal} notification for ${cronTime} (${mealTime})`
-      );
     });
+
+    console.log(`Scheduled ${MEAL_NOTIFICATIONS.length} meal notifications`);
   });
 
   // Helper: get today's weekday in uppercase (to match JSON keys)
@@ -129,10 +124,10 @@ module.exports = (client) => {
 
             // Create notification message
             const message =
-              `Upcoming ${mealDisplay}: ${mealTime}\n` +
-              `Today's ${mealDisplay} Menu (${dayDisplay}):\n${items}\n` +
+              `**Upcoming ${mealDisplay}:** ${mealTime}\n` +
+              `**Today's ${mealDisplay} Menu (${dayDisplay})**:\n${items}\n` +
               `${mealDisplay} starts in 45 minutes.` +
-              (pings ? `\n${pings}` : "");
+              (pings ? `\n\n${pings}` : "");
 
             await channel.send(message);
             console.log(`Sent ${meal} notification to channel ${channelId}`);

@@ -1,6 +1,9 @@
 require("dotenv").config();
 const { REST, Routes, SlashCommandBuilder } = require("discord.js");
 
+// Discord server ID
+const GUILD_ID = process.env.SYN_SERVER_ID;
+
 const commands = [
   new SlashCommandBuilder()
     .setName("ping")
@@ -29,43 +32,37 @@ const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
 (async () => {
   try {
-    console.log("Starting deployment of application (/) commands.");
-    console.log(`Deploying ${commands.length} commands...`);
+    if (GUILD_ID === "YOUR_GUILD_ID_HERE") {
+      console.error("Please set GUILD_ID in this file first!");
+      console.log("To get your Guild ID:");
+      console.log(
+        "1. Enable Developer Mode in Discord (User Settings > Advanced)"
+      );
+      console.log("2. Right-click your server name");
+      console.log("3. Click 'Copy Server ID'");
+      console.log("4. Replace GUILD_ID in this file");
+      return;
+    }
 
-    // List all commands being deployed
+    console.log(
+      `Deploying ${commands.length} commands to guild ${GUILD_ID}...`
+    );
+
     commands.forEach((cmd, index) => {
       console.log(`${index + 1}. /${cmd.name} - ${cmd.description}`);
     });
 
-    // Clear existing commands first (optional but helps with sync issues)
-    console.log("\nClearing existing global commands...");
-    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
-      body: [],
-    });
-    console.log("Existing commands cleared.");
-
-    // Wait a moment before re-registering
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    console.log("Registering new commands...");
     const data = await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID),
-      {
-        body: commands,
-      }
+      Routes.applicationGuildCommands(process.env.CLIENT_ID, GUILD_ID),
+      { body: commands }
     );
 
     console.log(
-      `\nSuccessfully registered ${data.length} global slash commands`
+      `\nSuccessfully registered ${data.length} guild slash commands`
     );
-    console.log("Commands may take up to 1 hour to sync globally, or try:");
-    console.log("- Restart Discord client");
-    console.log("- Leave and rejoin the server");
-    console.log(
-      "- Use the commands in a different server where the bot is present"
-    );
+    console.log("Commands should be available immediately in your server!");
   } catch (error) {
-    console.error("Failed to register slash commands:");
+    console.error("Failed to register guild slash commands:");
     console.error("Error details:", error);
 
     if (error.code === 50001) {
@@ -74,6 +71,8 @@ const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
       console.error(
         "Missing Permissions - Bot needs 'applications.commands' scope"
       );
+    } else if (error.code === 10004) {
+      console.error("Unknown Guild - Check GUILD_ID is correct");
     }
   }
 })();

@@ -1,29 +1,38 @@
 # Lucifer Help Menu
 ### Current Capabilities
-- Chat in any channel through CLI
-- Connect to any voice channel
-- Fetch lyrics from genius API
-- Display mess menu
-- Supports slash commands
+- Automated meal notifications (45 min before each meal)
+- Fetch lyrics from Genius API  
+- Display mess menu with slash commands
+- Connect to voice channels
+- Chat through CLI
 
-### Commands List
+### Menu Commands (Slash Commands)
+```
+/today - Get today's complete mess menu
+/breakfast - Show today's breakfast menu
+/lunch - Show today's lunch menu  
+/snacks - Show today's snacks menu
+/dinner - Show today's dinner menu
+```
 
-To start the bot or chat via CLI
-```node luci.js```
-To connect to a voice channel
-```node vc.js```
-To fetch lyrics of a song
-```lyr Song name Artist name```
+### Other Commands
+```
+lyr song name artist - Fetch lyrics for a song
+/ping - Test bot response
+/help - Show this help menu
+```
 
-To get today's mess menu
-```.today```
-To see today's breakfast
-```.breakfast```
-To see today's lunch
-```.lunch```
-To see today's snacks
-```.snacks```
-To see today's dinner
-```.dinner```
+### CLI Commands (For Admins)
+```
+node luci.js - Start the main bot
+node vc.js - Connect to voice channel
+```
+
+### Auto Notifications
+Bot automatically sends meal reminders 45 minutes before:
+- Breakfast: 8:00 AM - 9:00 AM
+- Lunch: 12:30 PM - 2:30 PM  
+- Snacks: 5:00 PM - 6:00 PM
+- Dinner: 8:00 PM - 9:00 PM
 
 -# [Github Repository](https://github.com/Kanishak-xd/luciferBot/)

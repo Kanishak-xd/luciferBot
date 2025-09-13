@@ -5,13 +5,7 @@ module.exports = (client) => {
   const genius = new Genius.Client(process.env.GENIUS_API_KEY);
 
   client.once("ready", () => {
-    console.log(`lyri module loaded..`);
-
-    // Set bot status
-    // client.user.setPresence({
-    //   status: "idle",
-    //   activities: [{ name: "over Server", type: 3 }],
-    // });
+    console.log(`- lyri module loaded....`);
   });
 
   client.on("messageCreate", async (message) => {
