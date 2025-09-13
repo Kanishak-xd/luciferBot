@@ -3,18 +3,9 @@ const path = require("path");
 const cron = require("node-cron");
 
 module.exports = (client) => {
-  // Map channel IDs to user IDs who should be pinged
+  // Map channel IDs to role ID that should be pinged
   const CHANNEL_CONFIG = {
-    // Channel ID
-    "1115924464518037524": [
-      // User IDs
-      "985981200059478136",
-      "465209208489508866",
-      "499558025892331522",
-      "755416213252866199",
-      "1029428423824789514",
-      "782231537269080064",
-    ],
+    "1115924464518037524": "1416425321632366645", // Channel ID: Role ID
   };
 
   // Meal timing configuration (45 minutes before each meal)
@@ -116,16 +107,14 @@ module.exports = (client) => {
         try {
           const channel = await client.channels.fetch(channelId);
           if (channel) {
-            // Create ping string for this channel
-            const channelUserIds = CHANNEL_CONFIG[channelId] || [];
-            const pings = channelUserIds
-              .map((userId) => `<@${userId}>`)
-              .join(" ");
+            // Create role ping for this channel
+            const roleId = CHANNEL_CONFIG[channelId];
+            const rolePing = `<@&${roleId}>`;
 
             // Create notification message
             const message =
-              `**Today's ${mealDisplay} Menu (${dayDisplay})**:\n${items}` +
-              (pings ? `\n${pings}` : "");
+              `Today's ${mealDisplay} Menu (${dayDisplay}):\n\n${items}\n\n` +
+              rolePing;
 
             await channel.send(message);
           } else {
