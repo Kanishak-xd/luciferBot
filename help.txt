@@ -1,4 +1,3 @@
-# Lucifer Help Menu
 ### Current Capabilities
 - Automated meal notifications (45 min before each meal)
 - Fetch lyrics from Genius API  

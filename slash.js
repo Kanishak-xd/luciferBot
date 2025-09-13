@@ -59,7 +59,7 @@ module.exports = (client) => {
 
           const helpEmbed = new EmbedBuilder()
             .setColor(0xff6969)
-            .setTitle("Lucifer Bot Help")
+            .setTitle("Lucifer Help Menu")
             .setDescription(helpMenu)
             .setTimestamp();
 
