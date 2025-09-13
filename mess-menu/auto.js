@@ -3,26 +3,26 @@ const path = require("path");
 const cron = require("node-cron");
 
 module.exports = (client) => {
-  // Configuration: Map channel IDs to user IDs who should be pinged
+  // Map channel IDs to user IDs who should be pinged
   const CHANNEL_CONFIG = {
+    // Channel ID
     "1115924464518037524": [
-      "123456789012345678", // Replace with actual user IDs
-      "987654321098765432", // Add more user IDs for this channel
-      // "another_user_id",
+      // User IDs
+      "985981200059478136",
+      "465209208489508866",
+      "499558025892331522",
+      "755416213252866199",
+      "1029428423824789514",
+      "782231537269080064",
     ],
-    // Add more channels and their respective user IDs
-    // "another_channel_id": [
-    //   "user_id_1",
-    //   "user_id_2",
-    // ],
   };
 
   // Meal timing configuration (45 minutes before each meal)
   const MEAL_NOTIFICATIONS = [
     {
       meal: "breakfast",
-      cronTime: "15 1 * * *", // 7:15 AM (45 min before 8:00 AM)
-      mealTime: "8:00 AM - 9:00 AM",
+      cronTime: "45 6 * * *", // 6:45 AM (45 min before 7:30 AM)
+      mealTime: "7:30 AM - 9:00 AM",
     },
     {
       meal: "lunch",
@@ -111,7 +111,7 @@ module.exports = (client) => {
 
       const items = menu[today][meal].join(", ");
 
-      // Send to all configured channels
+      // Send to all set channels
       for (const channelId of Object.keys(CHANNEL_CONFIG)) {
         try {
           const channel = await client.channels.fetch(channelId);
@@ -124,13 +124,10 @@ module.exports = (client) => {
 
             // Create notification message
             const message =
-              `**Upcoming ${mealDisplay}:** ${mealTime}\n` +
-              `**Today's ${mealDisplay} Menu (${dayDisplay})**:\n${items}\n` +
-              `${mealDisplay} starts in 45 minutes.` +
-              (pings ? `\n\n${pings}` : "");
+              `**Today's ${mealDisplay} Menu (${dayDisplay})**:\n${items}` +
+              (pings ? `\n${pings}` : "");
 
             await channel.send(message);
-            console.log(`Sent ${meal} notification to channel ${channelId}`);
           } else {
             console.warn(
               `Channel ${channelId} not found or bot doesn't have access`
@@ -147,21 +144,4 @@ module.exports = (client) => {
       console.error(`Error sending ${meal} notification:`, error);
     }
   }
-
-  // Optional: Manual trigger for testing (remove in production)
-  client.on("messageCreate", async (msg) => {
-    if (msg.author.bot) return;
-
-    // Admin command to test notifications (replace "YOUR_USER_ID" with your Discord user ID)
-    if (
-      msg.content === ".test-notification" &&
-      msg.author.id === "YOUR_USER_ID"
-    ) {
-      const testMeals = ["breakfast", "lunch", "snacks", "dinner"];
-      const randomMeal =
-        testMeals[Math.floor(Math.random() * testMeals.length)];
-      await sendMealNotification(randomMeal, "Test Time");
-      msg.reply(`Test notification sent for ${randomMeal}!`);
-    }
-  });
 };

@@ -33,10 +33,10 @@ A Discord bot built for learning and entertainment purposes, featuring mess menu
 /dinner      - Show today's dinner menu
 ```
 
-### Text Commands (Local development only)
+### Text Commands (Work everywhere)
 
 ```
-lyr [song] [artist]  - Fetch lyrics from Genius API
+lyr song artist  - Fetch lyrics from Genius API
 ```
 
 ### Development Commands (Local environment only)
@@ -52,7 +52,7 @@ node deployCmds.js   - Deploy commands globally (takes up to 1 hour)
 
 The bot sends meal reminders 45 minutes before each meal time:
 
-- **Breakfast**: 8:00 AM - 9:00 AM (reminder at 7:15 AM)
+- **Breakfast**: 7:30 AM - 9:00 AM (reminder at 6:45 AM)
 - **Lunch**: 12:30 PM - 2:30 PM (reminder at 11:45 AM)
 - **Snacks**: 5:00 PM - 6:00 PM (reminder at 4:15 PM)
 - **Dinner**: 8:00 PM - 9:00 PM (reminder at 7:15 PM)
