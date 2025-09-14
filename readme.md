@@ -26,6 +26,7 @@ A Discord bot built for learning and entertainment purposes, featuring mess menu
 ```
 /help        - Display help menu
 /ping        - Test bot response
+/menu        - Show full mess menu for the week
 /today       - Show today's complete mess menu
 /breakfast   - Show today's breakfast menu
 /lunch       - Show today's lunch menu

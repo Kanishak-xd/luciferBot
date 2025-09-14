@@ -74,6 +74,55 @@ module.exports = (client) => {
         return;
       }
 
+      // Full Week Menu
+      if (interaction.commandName === "menu") {
+        const menu = getMenu();
+        if (!menu) {
+          return await interaction.reply({
+            content: "Menu not found! Please contact admin.",
+            ephemeral: true,
+          });
+        }
+
+        const weekdays = [
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+          "SUNDAY",
+        ];
+
+        let description = `\n`;
+
+        for (const day of weekdays) {
+          if (!menu[day]) continue;
+
+          const meals = [];
+          for (const meal of ["breakfast", "lunch", "snacks", "dinner"]) {
+            if (menu[day][meal] && menu[day][meal].length > 0) {
+              meals.push(
+                `**${formatMealName(meal)}**: ${menu[day][meal].join(", ")}`
+              );
+            }
+          }
+
+          if (meals.length > 0) {
+            description += `**${day}**\n`;
+            description += meals.map((m) => `• ${m}`).join("\n") + "\n\n";
+          }
+        }
+
+        const embed = new EmbedBuilder()
+          .setColor(0xff6969)
+          .setTitle("Weekly Mess Menu")
+          .setDescription(description)
+          .setTimestamp();
+
+        await interaction.reply({ embeds: [embed] });
+      }
+
       // Menu commands
       if (
         ["today", "breakfast", "lunch", "snacks", "dinner"].includes(

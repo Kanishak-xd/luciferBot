@@ -23,6 +23,9 @@ const commands = [
   new SlashCommandBuilder()
     .setName("dinner")
     .setDescription("Show today's dinner menu"),
+  new SlashCommandBuilder()
+    .setName("menu")
+    .setDescription("Show the full mess menu for the week"),
 ].map((command) => command.toJSON());
 
 const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);

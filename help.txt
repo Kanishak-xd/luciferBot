@@ -7,7 +7,8 @@
 
 ### Menu Commands (Slash Commands)
 ```
-/today - Get today's complete mess menu
+/menu - Get full week's mess menu
+/today - Get today's mess menu
 /breakfast - Show today's breakfast menu
 /lunch - Show today's lunch menu  
 /snacks - Show today's snacks menu
