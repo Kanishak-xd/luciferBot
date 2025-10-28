@@ -2,14 +2,22 @@ require("dotenv").config();
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+const { connectDB, getMenuForServer } = require("./mess-menu/db");
 
 module.exports = (client) => {
-  client.once("ready", () => {
-    console.log(`- slash module loaded...`);
-  });
+  let dbConnected = false;
 
-  // Menu helper functions
-  const getMenuPath = () => path.join(__dirname, "mess-menu", "menu.json");
+  client.once("ready", async () => {
+    console.log(`- slash module loaded...`);
+    
+    // Connect to MongoDB on startup
+    try {
+      await connectDB();
+      dbConnected = true;
+    } catch (error) {
+      console.error("Failed to connect to database:", error);
+    }
+  });
 
   function getToday() {
     const days = [
@@ -28,17 +36,20 @@ module.exports = (client) => {
     return meal.charAt(0).toUpperCase() + meal.slice(1);
   }
 
-  function getMenu() {
-    const menuPath = getMenuPath();
-
-    if (!fs.existsSync(menuPath)) {
+  async function getMenu(serverId) {
+    if (!dbConnected) {
+      console.error("Database not connected");
       return null;
     }
 
     try {
-      return JSON.parse(fs.readFileSync(menuPath, "utf-8"));
+      const menuData = await getMenuForServer(serverId);
+      if (!menuData || !menuData.menu) {
+        return null;
+      }
+      return menuData.menu;
     } catch (error) {
-      console.error(`Error reading menu file:`, error);
+      console.error(`Error getting menu from database:`, error);
       return null;
     }
   }
@@ -76,10 +87,10 @@ module.exports = (client) => {
 
       // Full Week Menu
       if (interaction.commandName === "menu") {
-        const menu = getMenu();
+        const menu = await getMenu(interaction.guildId);
         if (!menu) {
           return await interaction.reply({
-            content: "Menu not found! Please contact admin.",
+            content: "Menu not found! Please upload a menu file on the website first.",
             ephemeral: true,
           });
         }
@@ -129,10 +140,10 @@ module.exports = (client) => {
           interaction.commandName
         )
       ) {
-        const menu = getMenu();
+        const menu = await getMenu(interaction.guildId);
         if (!menu) {
           return await interaction.reply({
-            content: "Menu not found! Please contact admin.",
+            content: "Menu not found! Please upload a menu file on the website first.",
             ephemeral: true,
           });
         }

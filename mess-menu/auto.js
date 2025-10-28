@@ -1,62 +1,137 @@
-const fs = require("fs");
-const path = require("path");
 const cron = require("node-cron");
+const {
+  connectDB,
+  getMenuForServer,
+  getMealScheduleForServer,
+  parseTimeToCron,
+} = require("./db");
 
 module.exports = (client) => {
-  // Map channel IDs to role ID that should be pinged
-  const CHANNEL_CONFIG = {
-    "1115924464518037524": "1416425321632366645", // Channel ID: Role ID
-  };
+  // Store scheduled tasks
+  const scheduledTasks = new Map();
+  let pollingInterval = null;
 
-  // Meal timing configuration (45 minutes before each meal)
-  const MEAL_NOTIFICATIONS = [
-    {
-      meal: "breakfast",
-      cronTime: "45 6 * * *", // 6:45 AM (45 min before 7:30 AM)
-      mealTime: "7:30 AM - 9:00 AM",
-    },
-    {
-      meal: "lunch",
-      cronTime: "45 11 * * *", // 11:45 AM (45 min before 12:30 PM)
-      mealTime: "12:30 PM - 2:30 PM",
-    },
-    {
-      meal: "snacks",
-      cronTime: "15 16 * * *", // 4:15 PM (45 min before 5:00 PM)
-      mealTime: "5:00 PM - 6:00 PM",
-    },
-    {
-      meal: "dinner",
-      cronTime: "15 19 * * *", // 7:15 PM (45 min before 8:00 PM)
-      mealTime: "8:00 PM - 9:00 PM",
-    },
-  ];
-
-  client.once("ready", () => {
+  client.once("ready", async () => {
     console.log(`- auto module loaded...`);
 
-    // Check if menu.json exists
-    const menuPath = path.join(__dirname, "menu.json");
-    if (!fs.existsSync(menuPath)) {
-      console.error("menu.json not found!");
-      return;
+    try {
+      // Connect to MongoDB
+      await connectDB();
+
+      // Initial setup for all servers
+      await refreshAllServers();
+
+      // Set up periodic polling (every 5 minutes) to check for updates
+      pollingInterval = setInterval(async () => {
+        console.log("Checking database for configuration updates...");
+        await refreshAllServers();
+      }, 5 * 60 * 1000); // 5 minutes
+
+      console.log("Database polling enabled (every 5 minutes)");
+    } catch (error) {
+      console.error("Error setting up meal notifications:", error);
     }
-
-    // Schedule all meal notifications
-    MEAL_NOTIFICATIONS.forEach(({ meal, cronTime, mealTime }) => {
-      cron.schedule(
-        cronTime,
-        () => {
-          sendMealNotification(meal, mealTime);
-        },
-        {
-          timezone: "Asia/Kolkata",
-        }
-      );
-    });
-
-    console.log(`Scheduled ${MEAL_NOTIFICATIONS.length} meal notifications`);
   });
+
+  // Listen for when bot joins a new guild
+  client.on("guildCreate", async (guild) => {
+    console.log(`Bot joined new guild: ${guild.name}`);
+    await setupServerMealNotifications(guild.id, guild);
+  });
+
+  // Clean up all tasks for a specific server
+  function cleanupServerTasks(serverId) {
+    const meals = ["breakfast", "lunch", "snacks", "dinner"];
+    for (const meal of meals) {
+      const taskKey = `${serverId}-${meal}`;
+      const existingTask = scheduledTasks.get(taskKey);
+      if (existingTask) {
+        existingTask.stop();
+        scheduledTasks.delete(taskKey);
+      }
+    }
+  }
+
+  // Refresh configurations for all servers
+  async function refreshAllServers() {
+    try {
+      // Get all servers the bot is in
+      const servers = client.guilds.cache;
+
+      // Set up meal notifications for each server
+      for (const [serverId, guild] of servers) {
+        await setupServerMealNotifications(serverId, guild);
+      }
+
+      console.log(`Configuration check complete for ${servers.size} servers`);
+    } catch (error) {
+      console.error("Error refreshing server configurations:", error);
+    }
+  }
+
+  // Set up meal notifications for a specific server
+  async function setupServerMealNotifications(serverId, guild) {
+    try {
+      // Get menu data and schedule for this server
+      const menuData = await getMenuForServer(serverId);
+      const schedule = await getMealScheduleForServer(serverId);
+
+      if (!menuData || !schedule) {
+        // If we had tasks for this server but config was removed, stop them
+        cleanupServerTasks(serverId);
+        return;
+      }
+
+      const { channelId, roleId } = {
+        channelId: menuData.channelId,
+        roleId: schedule.roleId,
+      };
+
+      if (!channelId) {
+        // If we had tasks for this server but channel was removed, stop them
+        cleanupServerTasks(serverId);
+        return;
+      }
+
+      // Stop any existing tasks for this server
+      cleanupServerTasks(serverId);
+
+      // Configure meal notifications based on schedule
+      const meals = ["breakfast", "lunch", "snacks", "dinner"];
+
+      for (const meal of meals) {
+        const timeString = schedule[meal];
+        if (!timeString) continue;
+
+        const cronTime = parseTimeToCron(timeString);
+        if (!cronTime) {
+          console.log(`Invalid time format for ${meal} in server: ${guild.name}`);
+          continue;
+        }
+
+        // Schedule the notification
+        const task = cron.schedule(
+          cronTime,
+          () => {
+            sendMealNotification(serverId, channelId, roleId, meal);
+          },
+          {
+            timezone: "Asia/Kolkata",
+          }
+        );
+
+        // Store the task
+        const taskKey = `${serverId}-${meal}`;
+        scheduledTasks.set(taskKey, task);
+
+        console.log(
+          `Scheduled ${meal} notification for server ${guild.name} at ${timeString}`
+        );
+      }
+    } catch (error) {
+      console.error(`Error setting up notifications for server: ${serverId}`, error);
+    }
+  }
 
   // Helper: get today's weekday in uppercase (to match JSON keys)
   function getToday() {
@@ -77,13 +152,18 @@ module.exports = (client) => {
     return meal.charAt(0).toUpperCase() + meal.slice(1);
   }
 
-  // Function to send meal notification to all configured channels
-  async function sendMealNotification(meal, mealTime) {
-    const menuPath = path.join(__dirname, "menu.json");
-
+  // Function to send meal notification
+  async function sendMealNotification(serverId, channelId, roleId, meal) {
     try {
-      // Read the latest menu data
-      const menu = JSON.parse(fs.readFileSync(menuPath, "utf-8"));
+      // Fetch fresh menu data
+      const menuData = await getMenuForServer(serverId);
+
+      if (!menuData || !menuData.menu) {
+        console.log(`No menu data found for server: ${serverId}`);
+        return;
+      }
+
+      const menu = menuData.menu;
       const today = getToday();
       const mealDisplay = formatMealName(meal);
       const dayDisplay = today.charAt(0) + today.slice(1).toLowerCase();
@@ -95,40 +175,31 @@ module.exports = (client) => {
         menu[today][meal].length === 0
       ) {
         console.log(
-          `No ${meal} menu found for ${today}, skipping notification.`
+          `No ${meal} menu found for ${today} in server ${serverId}, skipping notification.`
         );
         return;
       }
 
       const items = menu[today][meal].join(", ");
 
-      // Send to all set channels
-      for (const channelId of Object.keys(CHANNEL_CONFIG)) {
-        try {
-          const channel = await client.channels.fetch(channelId);
-          if (channel) {
-            // Create role ping for this channel
-            const roleId = CHANNEL_CONFIG[channelId];
-            const rolePing = `<@&${roleId}>`;
-
-            // Create notification message
-            const message =
-              `Today's ${mealDisplay} Menu (${dayDisplay}):\n\n${items}\n\n` +
-              rolePing;
-
-            await channel.send(message);
-          } else {
-            console.warn(
-              `Channel ${channelId} not found or bot doesn't have access`
-            );
-          }
-        } catch (error) {
-          console.error(
-            `Failed to send ${meal} notification to channel ${channelId}:`,
-            error.message
-          );
-        }
+      // Get the channel
+      const channel = await client.channels.fetch(channelId);
+      if (!channel) {
+        console.warn(
+          `Channel ${channelId} not found or bot doesn't have access`
+        );
+        return;
       }
+
+      // Create role ping if roleId exists
+      const rolePing = roleId ? `<@&${roleId}>` : "";
+
+      // Create notification message
+      const message =
+        `Today's ${mealDisplay} Menu (${dayDisplay}):\n\n${items}\n\n` + rolePing;
+
+      await channel.send(message);
+      console.log(`Sent ${meal} notification to server: ${serverId}`);
     } catch (error) {
       console.error(`Error sending ${meal} notification:`, error);
     }

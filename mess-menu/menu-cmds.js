@@ -1,17 +1,17 @@
-const fs = require("fs");
-const path = require("path");
+const { connectDB } = require("./db");
 
 module.exports = (client) => {
-  client.once("ready", () => {
+  client.once("ready", async () => {
     console.log(`- menu-cmds module loaded...`);
+    
+    // Connect to MongoDB
+    try {
+      await connectDB();
+      console.log(`Database connection ready for menu commands`);
+    } catch (error) {
+      console.error("Failed to connect to database:", error);
+    }
   });
 
-  const menuPath = path.join(__dirname, "menu.json");
-  if (!fs.existsSync(menuPath)) {
-    console.error("menu.json not found! Parse menu.js first.");
-    return;
-  }
-
-  // Just verify menu exists, all commands now handled by slash.js
-  console.log(`Menu file loaded successfully`);
+  // Menu data is now loaded from MongoDB, handled by slash.js
 };

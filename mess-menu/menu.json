@@ -17,13 +17,13 @@
       "Fruit (01pcs)"
     ],
     "snacks": [
-      "Vegetable Chomein Ltd",
+      "Aloo Chana Chat Ltd",
       "Tea +  Coffee"
     ],
     "dinner": [
-      "Onion Salad",
+      "Cucumber Salad",
       "Dal Makhani",
-      "Mix Veg",
+      "Aloo Capsicum",
       "Plain Rice",
       "Chapati",
       "Fruit Custard Ltd"
@@ -31,14 +31,14 @@
   },
   "TUESDAY": {
     "breakfast": [
-      "Mixed Paratha",
+      "Mixed Paratha/Gobi/Onion",
       "Mint Sauce",
       "Bread butter jam",
       "Pickle",
       "Tea/ Coffee"
     ],
     "lunch": [
-      "Onion Salad",
+      "Masala Onion Salad",
       "Aloo Bhaji",
       "Poori",
       "Vegetable Biryani",
@@ -46,12 +46,12 @@
       "Fruit (01pcs)"
     ],
     "snacks": [
-      "Matar Kulcha",
+      "Aloo Toast 2pcs",
       "Tea +  Coffee"
     ],
     "dinner": [
-      "Kheera Salad",
-      "Arhar Dal Tadka",
+      "Cucumber Salad",
+      "Moong Dal Fry",
       "Sev Tamatar",
       "Plain Rice",
       "Chapati",
@@ -60,9 +60,9 @@
   },
   "WEDNESDAY": {
     "breakfast": [
-      "Dal Paratha",
+      "Masala Idli",
       "Cornflakes",
-      "Tamatar Chutney",
+      "Coconut chutney",
       "Bread butter jam",
       "Tea/ Coffee"
     ],
@@ -76,7 +76,7 @@
       "Fruit (01pcs)"
     ],
     "snacks": [
-      "Aloo Chana Chat Ltd",
+      "Matar Kulcha",
       "Tea +  Coffee"
     ],
     "dinner": [
@@ -90,14 +90,14 @@
   },
   "THURSDAY": {
     "breakfast": [
-      "Uttpam/Vada 2-pcs",
-      "Sambhar",
-      "Coconut chutney",
+      "Aloo/ Paratha",
+      "Mint Sauce",
+      "Pickle",
       "Bread Butter Jam",
       "Tea/ Coffee"
     ],
     "lunch": [
-      "Cucumber Salad",
+      "Onion Salad",
       "Rajma Masala",
       "Khatta Meetha Kaddu",
       "Plain Rice",
@@ -111,25 +111,25 @@
     ],
     "dinner": [
       "Green Salad",
-      "Lobia Dal",
+      "Arhar Dal Tadka",
       "Dum Aloo",
       "Plain Rice",
       "Chapati",
-      "Balushahi 1pcs"
+      "Besan Halwa Ltd"
     ]
   },
   "FRIDAY": {
     "breakfast": [
-      "Aloo Ki Sabji",
-      "Poori",
+      "Dal Paratha",
+      "Tamatar Chutney",
       "Bread butter jam",
       "Pickle",
       "Tea/ Coffee"
     ],
     "lunch": [
       "Cucumber Salad",
-      "Panchmel Dal",
-      "Parwal Ki sabji",
+      "Dhaba Dal",
+      "Tindli Masala",
       "Plain Rice",
       "Chapati",
       "Butter Milk",
@@ -142,16 +142,16 @@
     "dinner": [
       "Cucumber Salad",
       "Moong Dal Fried",
-      "Soya Chaap Masala",
+      "Soya Afghani Masala",
       "Plain Rice",
       "Chapati",
-      "Boondi Ltd."
+      "Suji Halwa Ltd"
     ]
   },
   "SATURDAY": {
     "breakfast": [
-      "Aloo/ Paratha",
-      "Mint Sauce",
+      "Adai/Vada 2-pcs",
+      "Sambhar",
       "Bread butter jam",
       "Pickle",
       "Tea/Coffee"
@@ -166,16 +166,15 @@
       "Fruit (01pcs)"
     ],
     "snacks": [
-      "Aloo Sandwich 2pcs",
+      "Patties 1pcs",
       "Tea +  Coffee"
     ],
     "dinner": [
-      "Onion Salad",
-      "Malai Kofta",
-      "Black Masoor Dal Fry",
-      "Jeera Rice",
-      "Chapati",
-      "Besan Halwa Ltd"
+      "Kimchi Salad",
+      "Vegetable Hakka Noodles",
+      "Veg Manchurian Gravy",
+      "Vegetable Fried Rice",
+      "Vegetable Soup"
     ]
   },
   "SUNDAY": {
@@ -195,13 +194,13 @@
       "Fruit (01pcs)"
     ],
     "snacks": [
-      "Chana Chat/Coleslaw Sandwich 2 Pcs",
+      "Bhel Poori Ltd",
       "Tea +  Coffee"
     ],
     "dinner": [
       "Green Salad",
       "Moong Masoor Dal Fry",
-      "Aloo Pyaz Ki Sabji",
+      "Palak Corn",
       "Plain Rice",
       "Chapati",
       "Jalebi Ltd"
